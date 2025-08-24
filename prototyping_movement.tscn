@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://jaag46ppgqwh"]
+[gd_scene load_steps=5 format=3 uid="uid://jaag46ppgqwh"]
 
 [ext_resource type="Script" uid="uid://rc5x3jobg8bc" path="res://character_body_2d.gd" id="1_e7p10"]
 [ext_resource type="Texture2D" uid="uid://c2ccsl0fjy1y" path="res://icon.svg" id="1_f75e7"]
@@ -7,13 +7,31 @@
 radius = 60.0
 height = 126.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e7p10"]
+size = Vector2(1047.25, 11)
+
 [node name="Node2D" type="Node2D"]
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(589, 283)
 script = ExtResource("1_e7p10")
+metadata/_edit_group_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
 texture = ExtResource("1_f75e7")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 shape = SubResource("CapsuleShape2D_e7p10")
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(65, 411)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Floor"]
+position = Vector2(523.25, 5.5)
+scale = Vector2(8.17578, 0.0859377)
+texture = ExtResource("1_f75e7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(523.625, 5.50003)
+shape = SubResource("RectangleShape2D_e7p10")
