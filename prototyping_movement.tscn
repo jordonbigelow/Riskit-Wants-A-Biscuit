@@ -1,17 +1,20 @@
-[gd_scene load_steps=8 format=3 uid="uid://jaag46ppgqwh"]
+[gd_scene load_steps=9 format=3 uid="uid://jaag46ppgqwh"]
 
 [ext_resource type="Script" uid="uid://rc5x3jobg8bc" path="res://character_body_2d.gd" id="1_e7p10"]
 [ext_resource type="Texture2D" uid="uid://c2ccsl0fjy1y" path="res://icon.svg" id="1_f75e7"]
 [ext_resource type="Script" uid="uid://bn74q8prfbn6r" path="res://biscuit.gd" id="3_3cdrw"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e7p10"]
-radius = 60.0
-height = 126.0
+radius = 33.0
+height = 100.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e7p10"]
 size = Vector2(395, 11)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3cdrw"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3cdrw"]
+font_size = 14
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_npa0o"]
 size = Vector2(1691, 20)
@@ -19,11 +22,13 @@ size = Vector2(1691, 20)
 [node name="Node2D" type="Node2D"]
 
 [node name="Player" type="CharacterBody2D" parent="."]
-position = Vector2(390, 336)
+position = Vector2(386, 355)
 script = ExtResource("1_e7p10")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
+position = Vector2(1.7643e-05, 3.8147e-06)
+scale = Vector2(0.515625, 0.78125)
 texture = ExtResource("1_f75e7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
@@ -60,7 +65,7 @@ position = Vector2(197.5, 5.50003)
 shape = SubResource("RectangleShape2D_e7p10")
 
 [node name="Floor3" type="StaticBody2D" parent="."]
-position = Vector2(54, 233)
+position = Vector2(55, 260)
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Floor3"]
@@ -73,9 +78,8 @@ position = Vector2(197.5, 5.50003)
 shape = SubResource("RectangleShape2D_e7p10")
 
 [node name="Biscuit" type="Area2D" parent="."]
-position = Vector2(251, 197)
+position = Vector2(254, 235)
 script = ExtResource("3_3cdrw")
-metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Biscuit"]
 position = Vector2(2.38419e-07, 3.57628e-07)
@@ -84,6 +88,14 @@ texture = ExtResource("1_f75e7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Biscuit"]
 shape = SubResource("RectangleShape2D_3cdrw")
+
+[node name="Label" type="Label" parent="Biscuit"]
+offset_left = -22.0
+offset_top = -36.0
+offset_right = 24.0
+offset_bottom = -16.0
+text = "Biscuit"
+label_settings = SubResource("LabelSettings_3cdrw")
 
 [node name="KillZone" type="Area2D" parent="."]
 
