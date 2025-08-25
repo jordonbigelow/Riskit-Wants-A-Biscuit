@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://bn74q8prfbn6r" path="res://biscuit.gd" id="3_3cdrw"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e7p10"]
-radius = 33.0
+radius = 44.0
 height = 100.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e7p10"]
@@ -22,6 +22,7 @@ size = Vector2(1691, 20)
 [node name="Node2D" type="Node2D"]
 
 [node name="Player" type="CharacterBody2D" parent="."]
+z_index = 1
 position = Vector2(386, 355)
 script = ExtResource("1_e7p10")
 metadata/_edit_group_ = true
@@ -53,7 +54,6 @@ shape = SubResource("RectangleShape2D_e7p10")
 
 [node name="Floor2" type="StaticBody2D" parent="."]
 position = Vector2(586, 332)
-metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Floor2"]
 position = Vector2(197.5, 5.5)
