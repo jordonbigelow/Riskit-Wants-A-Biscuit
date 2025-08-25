@@ -25,5 +25,18 @@ func _physics_process(delta: float) -> void:
   move_and_slide()
 
 
-func _on_biscuit_tree_exited() -> void:
+# This is running when the scene is reloaded,
+# this will cause issues
+# Perhaps find a different signal to use???
+func _on_biscuit_tree_exiting() -> void:
   print("You collected the Biscuit!")
+
+func _on_kill_zone_body_entered(body: Node2D) -> void:
+  print("You Dead, bruh!")
+  $RespawnTimer.start()
+
+
+func _on_respawn_timer_timeout() -> void:
+  print("Timer Expired")
+  queue_free()
+  get_tree().reload_current_scene()

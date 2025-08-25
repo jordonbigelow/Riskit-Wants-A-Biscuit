@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://jaag46ppgqwh"]
+[gd_scene load_steps=8 format=3 uid="uid://jaag46ppgqwh"]
 
 [ext_resource type="Script" uid="uid://rc5x3jobg8bc" path="res://character_body_2d.gd" id="1_e7p10"]
 [ext_resource type="Texture2D" uid="uid://c2ccsl0fjy1y" path="res://icon.svg" id="1_f75e7"]
@@ -13,10 +13,13 @@ size = Vector2(395, 11)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3cdrw"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_npa0o"]
+size = Vector2(1691, 20)
+
 [node name="Node2D" type="Node2D"]
 
 [node name="Player" type="CharacterBody2D" parent="."]
-position = Vector2(264, 337)
+position = Vector2(390, 336)
 script = ExtResource("1_e7p10")
 metadata/_edit_group_ = true
 
@@ -25,6 +28,10 @@ texture = ExtResource("1_f75e7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 shape = SubResource("CapsuleShape2D_e7p10")
+
+[node name="RespawnTimer" type="Timer" parent="Player"]
+wait_time = 1.5
+one_shot = true
 
 [node name="Floor" type="StaticBody2D" parent="."]
 position = Vector2(65, 411)
@@ -78,5 +85,14 @@ texture = ExtResource("1_f75e7")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Biscuit"]
 shape = SubResource("RectangleShape2D_3cdrw")
 
+[node name="KillZone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone"]
+position = Vector2(531, 651)
+shape = SubResource("RectangleShape2D_npa0o")
+
+[connection signal="timeout" from="Player/RespawnTimer" to="Player" method="_on_respawn_timer_timeout"]
 [connection signal="body_entered" from="Biscuit" to="Biscuit" method="_on_body_entered"]
 [connection signal="tree_exited" from="Biscuit" to="Player" method="_on_biscuit_tree_exited"]
+[connection signal="tree_exiting" from="Biscuit" to="Player" method="_on_biscuit_tree_exiting"]
+[connection signal="body_entered" from="KillZone" to="Player" method="_on_kill_zone_body_entered"]
