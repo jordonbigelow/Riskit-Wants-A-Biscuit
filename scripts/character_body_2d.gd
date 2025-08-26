@@ -42,9 +42,6 @@ func _physics_process(delta: float) -> void:
   move_and_slide()
 
 
-# This is running when the scene is reloaded,
-# this will cause issues
-# Perhaps find a different signal to use???
 func _on_biscuit_tree_exiting() -> void:
   print("You collected the Biscuit!")
   
@@ -58,3 +55,11 @@ func _on_kill_zone_body_entered(body: Node2D) -> void:
 func _on_respawn_timer_timeout() -> void:
   queue_free()
   get_tree().reload_current_scene()
+
+
+func _on_enemy_player_hit() -> void:
+  print("You Dead, bruh!")
+  process_mode = Node.PROCESS_MODE_DISABLED 
+  
+  if $RespawnTimer.time_left <= 0:
+    $RespawnTimer.start()
