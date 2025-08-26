@@ -1,11 +1,12 @@
-[gd_scene load_steps=14 format=4 uid="uid://cfr7v288b4fg3"]
+[gd_scene load_steps=15 format=4 uid="uid://cfr7v288b4fg3"]
 
 [ext_resource type="Texture2D" uid="uid://cj8sfbb87fepi" path="res://assets/Tileset_Templates/Tileset_2D Platformer.png" id="1_8mm7a"]
-[ext_resource type="Script" uid="uid://rc5x3jobg8bc" path="res://character_body_2d.gd" id="2_hq1ik"]
+[ext_resource type="Script" uid="uid://rc5x3jobg8bc" path="res://scripts/character_body_2d.gd" id="2_hq1ik"]
 [ext_resource type="Texture2D" uid="uid://c1g0gtsufltck" path="res://assets/placeholder-char.png" id="3_nfk4m"]
-[ext_resource type="Script" uid="uid://bn74q8prfbn6r" path="res://biscuit.gd" id="4_66tet"]
+[ext_resource type="Script" uid="uid://bn74q8prfbn6r" path="res://scripts/biscuit.gd" id="4_66tet"]
 [ext_resource type="Texture2D" uid="uid://c2ccsl0fjy1y" path="res://icon.svg" id="5_7ycvg"]
 [ext_resource type="Texture2D" uid="uid://cjyr5gfeurecl" path="res://assets/placeholder-enemy.png" id="6_hq1ik"]
+[ext_resource type="Script" uid="uid://b5m2flqs2ju6b" path="res://scripts/enemy.gd" id="6_nfk4m"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_001wa"]
 texture = ExtResource("1_8mm7a")
@@ -263,6 +264,7 @@ label_settings = SubResource("LabelSettings_kh07m")
 
 [node name="Enemy" type="CharacterBody2D" parent="."]
 position = Vector2(429, 246)
+script = ExtResource("6_nfk4m")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Enemy"]
@@ -271,6 +273,9 @@ texture = ExtResource("6_hq1ik")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_hq1ik")
+
+[node name="RayCast2D" type="RayCast2D" parent="Enemy"]
+target_position = Vector2(0, 17)
 
 [connection signal="timeout" from="CharacterBody2D/RespawnTimer" to="CharacterBody2D" method="_on_respawn_timer_timeout"]
 [connection signal="body_entered" from="KillZone" to="CharacterBody2D" method="_on_kill_zone_body_entered"]
