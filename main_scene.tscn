@@ -193,9 +193,8 @@ texture = ExtResource("1_8mm7a")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_001wa")
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lpbtr"]
-radius = 5.0
-height = 16.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nfk4m"]
+size = Vector2(12, 15)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_wfnts"]
 distance = 2.0
@@ -228,7 +227,8 @@ drag_horizontal_enabled = true
 texture = ExtResource("3_nfk4m")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-shape = SubResource("CapsuleShape2D_lpbtr")
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_nfk4m")
 
 [node name="RespawnTimer" type="Timer" parent="CharacterBody2D"]
 wait_time = 1.5
