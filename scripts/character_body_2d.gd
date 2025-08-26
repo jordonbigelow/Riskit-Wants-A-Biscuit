@@ -13,7 +13,6 @@ func _physics_process(delta: float) -> void:
     
   if is_on_wall() and Input.is_action_just_pressed("jump"):
     velocity.y = JUMP_VELOCITY
-    print("you're on the wall")
     
   if not is_on_floor():
     velocity += get_gravity() * delta
@@ -43,6 +42,5 @@ func _on_kill_zone_body_entered(body: Node2D) -> void:
 
 
 func _on_respawn_timer_timeout() -> void:
-  print("Timer Expired")
   queue_free()
   get_tree().reload_current_scene()
