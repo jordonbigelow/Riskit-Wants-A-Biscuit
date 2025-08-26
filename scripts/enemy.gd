@@ -13,6 +13,11 @@ func _physics_process(delta: float) -> void:
   if not $RayCast2D.is_colliding():
     direction *= -1    
     
+  if direction < 0:
+    $Sprite2D.flip_h = true
+  if direction > 0:
+    $Sprite2D.flip_h = false
+    
   if direction:
     velocity.x = direction * SPEED
   else:
