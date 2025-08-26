@@ -37,8 +37,9 @@ func _on_biscuit_tree_exiting() -> void:
   
 
 func _on_kill_zone_body_entered(body: Node2D) -> void:
-  print("You Dead, bruh!")
-  $RespawnTimer.start()
+  if body.name == "Player":
+    print("You Dead, bruh!")
+    $RespawnTimer.start()
 
 
 func _on_respawn_timer_timeout() -> void:
