@@ -57,7 +57,7 @@ tile_map_data = PackedByteArray("AAALABYAAAADAAkAAAAMABYAAAADAAkAAAANABYAAAADAAk
 tile_set = SubResource("TileSet_lpbtr")
 
 [node name="Player" type="CharacterBody2D" parent="."]
-position = Vector2(210, 335)
+position = Vector2(161, 342)
 script = ExtResource("2_18nlu")
 metadata/_edit_group_ = true
 
