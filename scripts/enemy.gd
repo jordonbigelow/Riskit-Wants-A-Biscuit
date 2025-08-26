@@ -8,7 +8,6 @@ var direction := -1
 func _physics_process(delta: float) -> void:
   if not is_on_floor():
     velocity += get_gravity() * delta
-    print("woohoo... I'm flyin'!")
   
   if not $RayCast2D.is_colliding():
     direction *= -1    
