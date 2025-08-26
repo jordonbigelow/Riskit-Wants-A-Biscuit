@@ -211,26 +211,26 @@ size = Vector2(12, 15)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(-8, -2)
-tile_map_data = PackedByteArray("AAALABYAAAADAAkAAAAMABYAAAADAAkAAAANABYAAAADAAkAAAAOABYAAAADAAkAAAAPABYAAAADAAkAAAAQABYAAAAEAAkAAAASABQAAAABAAkAAAAUABIAAAABAAkAAAAWABAAAAACAAkAAAAXABAAAAADAAkAAAAYABAAAAADAAkAAAAZABAAAAADAAkAAAAaABAAAAADAAkAAAAbABAAAAAEAAkAAAAdAA4AAAABAAgAAAAdAA0AAAABAAcAAAAdAAwAAAABAAcAAAAdAAsAAAABAAcAAAAdAAoAAAABAAYAAAAdAAgAAAACAAkAAAAeAAgAAAADAAkAAAAfAAgAAAADAAkAAAAgAAgAAAADAAkAAAAhAAgAAAADAAkAAAAiAAgAAAAEAAkAAAAKABYAAAACAAkAAAA=")
+tile_map_data = PackedByteArray("AAALABYAAAADAAkAAAAMABYAAAADAAkAAAANABYAAAADAAkAAAAOABYAAAADAAkAAAAPABYAAAADAAkAAAAQABYAAAAEAAkAAAASABQAAAABAAkAAAAUABIAAAABAAkAAAAWABAAAAACAAkAAAAXABAAAAADAAkAAAAYABAAAAADAAkAAAAZABAAAAADAAkAAAAaABAAAAADAAkAAAAbABAAAAAEAAkAAAAdAA4AAAABAAgAAAAdAA0AAAABAAcAAAAdAAwAAAABAAcAAAAdAAsAAAABAAcAAAAdAAoAAAABAAYAAAAgAAgAAAADAAkAAAAhAAgAAAADAAkAAAAKABYAAAACAAkAAAAfAAgAAAACAAkAAAAiAAgAAAADAAkAAAAjAAgAAAADAAkAAAAkAAgAAAAEAAkAAAA=")
 tile_set = SubResource("TileSet_lpbtr")
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="Player" type="CharacterBody2D" parent="."]
 position = Vector2(210, 335)
 script = ExtResource("2_hq1ik")
 metadata/_edit_group_ = true
 
-[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+[node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(3, 3)
 drag_horizontal_enabled = true
 
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
 texture = ExtResource("3_nfk4m")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_nfk4m")
 
-[node name="RespawnTimer" type="Timer" parent="CharacterBody2D"]
+[node name="RespawnTimer" type="Timer" parent="Player"]
 wait_time = 1.5
 one_shot = true
 
@@ -242,7 +242,7 @@ metadata/_edit_group_ = true
 shape = SubResource("WorldBoundaryShape2D_wfnts")
 
 [node name="Biscuit" type="Area2D" parent="."]
-position = Vector2(389, 241)
+position = Vector2(536, 113)
 script = ExtResource("4_66tet")
 metadata/_edit_group_ = true
 
@@ -275,9 +275,9 @@ position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_hq1ik")
 
 [node name="RayCast2D" type="RayCast2D" parent="Enemy"]
-target_position = Vector2(0, 17)
+target_position = Vector2(0, 23)
 
-[connection signal="timeout" from="CharacterBody2D/RespawnTimer" to="CharacterBody2D" method="_on_respawn_timer_timeout"]
-[connection signal="body_entered" from="KillZone" to="CharacterBody2D" method="_on_kill_zone_body_entered"]
+[connection signal="timeout" from="Player/RespawnTimer" to="Player" method="_on_respawn_timer_timeout"]
+[connection signal="body_entered" from="KillZone" to="Player" method="_on_kill_zone_body_entered"]
 [connection signal="body_entered" from="Biscuit" to="Biscuit" method="_on_body_entered"]
-[connection signal="tree_exiting" from="Biscuit" to="CharacterBody2D" method="_on_biscuit_tree_exiting"]
+[connection signal="tree_exiting" from="Biscuit" to="Player" method="_on_biscuit_tree_exiting"]
