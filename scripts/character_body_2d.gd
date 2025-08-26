@@ -59,7 +59,6 @@ func _on_respawn_timer_timeout() -> void:
 
 func _on_enemy_player_hit() -> void:
   print("You Dead, bruh!")
-  process_mode = Node.PROCESS_MODE_DISABLED 
   
   if $RespawnTimer.time_left <= 0:
     $RespawnTimer.start()
