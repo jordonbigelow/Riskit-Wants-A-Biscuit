@@ -9,8 +9,17 @@ func _physics_process(delta: float) -> void:
   if not is_on_floor():
     velocity += get_gravity() * delta
   
-  if not $RayCast2D.is_colliding():
-    direction *= -1    
+  if $DeathDetector.is_colliding():
+    print("enemy ded, breh")
+    queue_free()
+  
+  if not $LedgeDetector.is_colliding():
+    direction *= -1
+    
+  if $LeftSidePlayerDetector.is_colliding():
+    print("You ded")    
+  elif $RightSidePlayerDetector.is_colliding():
+    print("You still ded")
     
   if direction < 0:
     $Sprite2D.flip_h = true
