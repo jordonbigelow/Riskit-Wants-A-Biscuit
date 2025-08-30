@@ -1,0 +1,92 @@
+[gd_scene load_steps=5 format=3 uid="uid://dmon27yv7tpnh"]
+
+[ext_resource type="Script" uid="uid://beiovpjcegcd2" path="res://scripts/starting_screen.gd" id="1_lbefa"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_22hlr"]
+font_size = 48
+outline_size = 25
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_22hlr"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lbefa"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+
+[node name="StartingScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lbefa")
+
+[node name="MainUI" type="BoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -253.0
+offset_top = -33.5
+offset_right = 253.0
+offset_bottom = 33.5
+grow_horizontal = 2
+grow_vertical = 2
+vertical = true
+
+[node name="GameTitleLabel" type="Label" parent="MainUI"]
+layout_mode = 2
+text = "Riskit Wants a Biscuit!"
+label_settings = SubResource("LabelSettings_22hlr")
+
+[node name="PlayButton" type="Button" parent="MainUI"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "PLAY"
+
+[node name="SettingsButton" type="Button" parent="MainUI"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "SETTINGS"
+
+[node name="GuideButton" type="Button" parent="MainUI"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "GUIDE"
+
+[node name="MadeByLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -506.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_22hlr")
+text = "Made By BitMage-Studios"
+horizontal_alignment = 2
+
+[node name="MadeWithLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 133.0
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_lbefa")
+text = "Made with Godot"
+
+[connection signal="pressed" from="MainUI/PlayButton" to="." method="_on_play_button_pressed"]
