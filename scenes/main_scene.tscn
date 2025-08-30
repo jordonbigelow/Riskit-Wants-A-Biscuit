@@ -1,5 +1,6 @@
-[gd_scene load_steps=15 format=4 uid="uid://cfr7v288b4fg3"]
+[gd_scene load_steps=16 format=4 uid="uid://cfr7v288b4fg3"]
 
+[ext_resource type="Script" uid="uid://gl61tfrcih2e" path="res://scripts/main_scene.gd" id="1_18nlu"]
 [ext_resource type="Texture2D" uid="uid://cj8sfbb87fepi" path="res://assets/Tileset_Templates/Tileset_2D Platformer.png" id="1_c16ls"]
 [ext_resource type="Script" uid="uid://rc5x3jobg8bc" path="res://scripts/character_body_2d.gd" id="2_18nlu"]
 [ext_resource type="Texture2D" uid="uid://c1g0gtsufltck" path="res://assets/placeholder-char.png" id="3_c1pb6"]
@@ -49,7 +50,8 @@ size = Vector2(12, 15)
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_wfnts"]
 distance = 2.0
 
-[node name="Node2D" type="Node2D"]
+[node name="MainScene" type="Node2D"]
+script = ExtResource("1_18nlu")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(-8, -2)
@@ -127,8 +129,36 @@ metadata/_edit_group_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone"]
 shape = SubResource("WorldBoundaryShape2D_wfnts")
 
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -28.0
+offset_top = 411.0
+offset_right = 89.0
+offset_bottom = 444.0
+
+[node name="BackButton" type="Button" parent="HUD"]
+layout_mode = 0
+offset_right = 114.0
+offset_bottom = 31.0
+text = "Back to Menu"
+
+[node name="HealthUI" type="BoxContainer" parent="HUD"]
+layout_mode = 0
+offset_top = -174.0
+offset_right = 327.0
+offset_bottom = -134.0
+
+[node name="HealthLabel" type="Label" parent="HUD/HealthUI"]
+layout_mode = 2
+text = "Health:     "
+
+[node name="HealthProgressBar" type="ProgressBar" parent="HUD/HealthUI"]
+layout_mode = 2
+
 [connection signal="timeout" from="Player/RespawnTimer" to="Player" method="_on_respawn_timer_timeout"]
 [connection signal="body_entered" from="Biscuit" to="Biscuit" method="_on_body_entered"]
 [connection signal="tree_exiting" from="Biscuit" to="Player" method="_on_biscuit_tree_exiting"]
 [connection signal="player_hit" from="Enemy" to="Player" method="_on_enemy_player_hit"]
 [connection signal="body_entered" from="KillZone" to="Player" method="_on_kill_zone_body_entered"]
+[connection signal="pressed" from="HUD/BackButton" to="." method="_on_back_button_pressed"]
