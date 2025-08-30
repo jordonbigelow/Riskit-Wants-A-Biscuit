@@ -90,3 +90,5 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_lbefa")
 text = "Made with Godot"
 
 [connection signal="pressed" from="MainUI/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="MainUI/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="MainUI/GuideButton" to="." method="_on_guide_button_pressed"]
