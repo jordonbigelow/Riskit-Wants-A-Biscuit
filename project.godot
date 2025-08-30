@@ -12,6 +12,7 @@ config_version=5
 
 config/name="Riskit Wants A Biscuit"
 config/tags=PackedStringArray("platformers")
+run/main_scene="uid://dmon27yv7tpnh"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
