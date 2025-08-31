@@ -44,6 +44,9 @@ func _physics_process(delta: float) -> void:
 
 func _on_biscuit_tree_exiting() -> void:
   print("You collected the Biscuit!")
+  $Camera2D/HUD/BackButton.visible = true
+  $Camera2D/HUD/YouWinLabel.visible = true
+  
   
 
 func _on_kill_zone_body_entered(body: Node2D) -> void:
