@@ -6,6 +6,7 @@ const JUMP_VELOCITY = -250.0
 var direction := -1
 
 signal player_hit
+signal killed
 
 func _physics_process(delta: float) -> void:
   if not is_on_floor():
@@ -13,6 +14,7 @@ func _physics_process(delta: float) -> void:
   
   if $DeathDetector.is_colliding():
     print("enemy ded, breh")
+    emit_signal("killed")
     queue_free()
   
   if not $LedgeDetector.is_colliding():
