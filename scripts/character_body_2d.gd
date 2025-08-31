@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+@onready var starting_scene: PackedScene = load("res://scenes/starting_screen.tscn")
 
 const SPEED = 100.0
 const JUMP_VELOCITY = -250.0
@@ -44,19 +45,20 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_biscuit_tree_exiting() -> void:
-  print("You collected the Biscuit!")
-  $Camera2D/HUD/BackButton.visible = true
+  #$Camera2D/HUD/BackButton.visible = true
   $Camera2D/HUD/YouWinLabel.visible = true
-  
+  $GameWonTimer.start()
 
 func _on_kill_zone_body_entered(body: Node2D) -> void:
   if body.name == "Player":
     $Camera2D/HUD/DeadLabel.visible = true
+    Engine.time_scale = 0.5
     $RespawnTimer.start()
 
 
 func _on_respawn_timer_timeout() -> void:
   queue_free()
+  Engine.time_scale = 1.0
   get_tree().reload_current_scene()
 
 
@@ -64,6 +66,7 @@ func _on_enemy_player_hit() -> void:
   $Camera2D/HUD/DeadLabel.visible = true
   
   if $RespawnTimer.time_left <= 0:
+    Engine.time_scale = 0.25
     $RespawnTimer.start()
 
 
