@@ -51,6 +51,7 @@ size = Vector2(12, 15)
 distance = 2.0
 
 [node name="MainScene" type="Node2D"]
+position = Vector2(405, -39)
 script = ExtResource("1_18nlu")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -61,11 +62,41 @@ tile_set = SubResource("TileSet_lpbtr")
 [node name="Player" type="CharacterBody2D" parent="."]
 position = Vector2(161, 342)
 script = ExtResource("2_18nlu")
-metadata/_edit_group_ = true
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(3, 3)
-drag_horizontal_enabled = true
+
+[node name="HUD" type="Control" parent="Player/Camera2D"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -192.0
+offset_top = -108.0
+offset_right = 191.0
+offset_bottom = 107.0
+
+[node name="BackButton" type="Button" parent="Player/Camera2D/HUD"]
+visible = false
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -42.0
+offset_right = 166.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "Back to Menu"
+
+[node name="YouWinLabel" type="Label" parent="Player/Camera2D/HUD"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -35.0
+offset_right = 35.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "You win! "
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
 texture = ExtResource("3_c1pb6")
@@ -122,6 +153,54 @@ target_position = Vector2(9, 0)
 [node name="DeathDetector" type="RayCast2D" parent="Enemy"]
 target_position = Vector2(0, -12)
 
+[node name="Enemy2" type="CharacterBody2D" parent="."]
+position = Vector2(352, -10)
+script = ExtResource("6_mngbo")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemy2"]
+texture = ExtResource("7_4w45t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy2"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_hq1ik")
+
+[node name="LedgeDetector" type="RayCast2D" parent="Enemy2"]
+target_position = Vector2(0, 23)
+
+[node name="LeftSidePlayerDetector" type="RayCast2D" parent="Enemy2"]
+target_position = Vector2(-9, 0)
+
+[node name="RightSidePlayerDetector" type="RayCast2D" parent="Enemy2"]
+target_position = Vector2(9, 0)
+
+[node name="DeathDetector" type="RayCast2D" parent="Enemy2"]
+target_position = Vector2(0, -12)
+
+[node name="Enemy3" type="CharacterBody2D" parent="."]
+position = Vector2(336, -346)
+script = ExtResource("6_mngbo")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemy3"]
+texture = ExtResource("7_4w45t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy3"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_hq1ik")
+
+[node name="LedgeDetector" type="RayCast2D" parent="Enemy3"]
+target_position = Vector2(0, 23)
+
+[node name="LeftSidePlayerDetector" type="RayCast2D" parent="Enemy3"]
+target_position = Vector2(-9, 0)
+
+[node name="RightSidePlayerDetector" type="RayCast2D" parent="Enemy3"]
+target_position = Vector2(9, 0)
+
+[node name="DeathDetector" type="RayCast2D" parent="Enemy3"]
+target_position = Vector2(0, -12)
+
 [node name="KillZone" type="Area2D" parent="."]
 position = Vector2(621, 462)
 metadata/_edit_group_ = true
@@ -129,36 +208,11 @@ metadata/_edit_group_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone"]
 shape = SubResource("WorldBoundaryShape2D_wfnts")
 
-[node name="HUD" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_left = -28.0
-offset_top = 411.0
-offset_right = 89.0
-offset_bottom = 444.0
-
-[node name="BackButton" type="Button" parent="HUD"]
-layout_mode = 0
-offset_right = 114.0
-offset_bottom = 31.0
-text = "Back to Menu"
-
-[node name="HealthUI" type="BoxContainer" parent="HUD"]
-layout_mode = 0
-offset_top = -174.0
-offset_right = 327.0
-offset_bottom = -134.0
-
-[node name="HealthLabel" type="Label" parent="HUD/HealthUI"]
-layout_mode = 2
-text = "Health:     "
-
-[node name="HealthProgressBar" type="ProgressBar" parent="HUD/HealthUI"]
-layout_mode = 2
-
+[connection signal="pressed" from="Player/Camera2D/HUD/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="timeout" from="Player/RespawnTimer" to="Player" method="_on_respawn_timer_timeout"]
 [connection signal="body_entered" from="Biscuit" to="Biscuit" method="_on_body_entered"]
 [connection signal="tree_exiting" from="Biscuit" to="Player" method="_on_biscuit_tree_exiting"]
 [connection signal="player_hit" from="Enemy" to="Player" method="_on_enemy_player_hit"]
+[connection signal="player_hit" from="Enemy2" to="Player" method="_on_enemy_player_hit"]
+[connection signal="player_hit" from="Enemy3" to="Player" method="_on_enemy_player_hit"]
 [connection signal="body_entered" from="KillZone" to="Player" method="_on_kill_zone_body_entered"]
-[connection signal="pressed" from="HUD/BackButton" to="." method="_on_back_button_pressed"]
