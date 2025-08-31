@@ -6,6 +6,7 @@ const JUMP_VELOCITY = -250.0
 const DOUBLE_JUMP_AMOUNT = 1
 var player_jump_amount = 0
 var can_player_double_jump: bool = true
+var kill_count: int = 0
 
 
 func _physics_process(delta: float) -> void:
@@ -47,11 +48,10 @@ func _on_biscuit_tree_exiting() -> void:
   $Camera2D/HUD/BackButton.visible = true
   $Camera2D/HUD/YouWinLabel.visible = true
   
-  
 
 func _on_kill_zone_body_entered(body: Node2D) -> void:
   if body.name == "Player":
-    print("You Dead, bruh!")
+    $Camera2D/HUD/DeadLabel.visible = true
     $RespawnTimer.start()
 
 
@@ -61,7 +61,12 @@ func _on_respawn_timer_timeout() -> void:
 
 
 func _on_enemy_player_hit() -> void:
-  print("You Dead, bruh!")
+  $Camera2D/HUD/DeadLabel.visible = true
   
   if $RespawnTimer.time_left <= 0:
     $RespawnTimer.start()
+
+
+func _on_enemy_killed() -> void:
+  kill_count += 1
+  $Camera2D/HUD/KillCount.text = "Kills: " + str(kill_count)
