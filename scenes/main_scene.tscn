@@ -79,7 +79,12 @@ distance = 2.0
 [node name="MainScene" type="Node2D"]
 script = ExtResource("1_18nlu")
 
-[node name="Background" type="TileMapLayer" parent="."]
+[node name="Background2" type="ColorRect" parent="."]
+offset_left = -507.0
+offset_top = -2784.0
+offset_right = 1430.0
+offset_bottom = 685.0
+color = Color(0.246609, 0.468349, 1, 1)
 
 [node name="Platforms" type="TileMapLayer" parent="."]
 position = Vector2(-8, -2)
