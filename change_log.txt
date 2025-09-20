@@ -1,2 +1,5 @@
 - added skull icon for Kill Counter
 - added a blue background
+- added jumping sound effects
+- added enemy death sound
+- added biscuit collect sound
