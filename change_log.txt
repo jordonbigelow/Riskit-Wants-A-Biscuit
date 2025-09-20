@@ -1,0 +1,2 @@
+- added skull icon for Kill Counter
+- added a blue background
