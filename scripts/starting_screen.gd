@@ -4,6 +4,8 @@ extends Control
 @onready var guide_scene: PackedScene = load("res://scenes/guide_screen.tscn")
 
 func _on_play_button_pressed() -> void:
+	$AudioStreamPlayer2D.play()
+	await get_tree().create_timer(0.5).timeout
 	get_tree().change_scene_to_packed(starting_scene)
 
 
@@ -12,4 +14,6 @@ func _on_settings_button_pressed() -> void:
 
 
 func _on_guide_button_pressed() -> void:
+	$AudioStreamPlayer2D.play()
+	await get_tree().create_timer(0.5).timeout
 	get_tree().change_scene_to_packed(guide_scene)

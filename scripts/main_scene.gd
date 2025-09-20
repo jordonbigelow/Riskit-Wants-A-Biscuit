@@ -5,6 +5,7 @@ extends Node2D
 @onready var biscuit_collect_sound = load("res://assets/sound/biscuit_collect.wav")
 @onready var enemy_killed_sound = load("res://assets/sound/enemy_squished.wav")
 @onready var player_jump_sound = load("res://assets/sound/jump.wav")
+@onready var button_clicked_sound = load("res://assets/sound/button_click.wav")
 
 
 func _process(delta: float) -> void:
@@ -16,6 +17,9 @@ func _process(delta: float) -> void:
 
 
 func _on_back_button_pressed() -> void:
+	audio_player.set_stream(button_clicked_sound)
+	audio_player.play()
+	await get_tree().create_timer(0.5).timeout
 	get_tree().change_scene_to_packed(starting_screen)
 
 
