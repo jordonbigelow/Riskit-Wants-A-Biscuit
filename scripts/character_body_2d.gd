@@ -18,22 +18,28 @@ func _physics_process(delta: float) -> void:
 		$Sprite2D.flip_h = false
 		
 	if is_on_wall() and Input.is_action_just_pressed("jump"):
+		$AudioStreamPlayer2D.pitch_scale += 0.1
+		$AudioStreamPlayer2D.play()
 		velocity.y = JUMP_VELOCITY
 	
 	if not is_on_floor() and Input.is_action_just_pressed("jump"):
 		if player_jump_amount < DOUBLE_JUMP_AMOUNT:
+			$AudioStreamPlayer2D.pitch_scale = 1.5
+			$AudioStreamPlayer2D.play()
 			player_jump_amount += 1
 			
 			if can_player_double_jump:
 				velocity.y = JUMP_VELOCITY  
 	
 	if is_on_floor():
+		$AudioStreamPlayer2D.pitch_scale = 1.0
 		player_jump_amount = 0    
 		
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
 	if Input.is_action_just_pressed("jump") and is_on_floor():
+		$AudioStreamPlayer2D.play()
 		velocity.y = JUMP_VELOCITY
 	
 	var direction := Input.get_axis("move_left", "move_right")
