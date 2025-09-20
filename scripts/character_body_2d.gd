@@ -74,4 +74,4 @@ func _on_enemy_player_hit() -> void:
 
 func _on_enemy_killed() -> void:
 	kill_count += 1
-	$Camera2D/HUD/KillCount.text = "Kills: " + str(kill_count)
+	$Camera2D/HUD/KillCountComponent/KillCount.text = " x " + str(kill_count)
