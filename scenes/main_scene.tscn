@@ -77,7 +77,6 @@ size = Vector2(10, 14)
 distance = 2.0
 
 [node name="MainScene" type="Node2D"]
-position = Vector2(405, -39)
 script = ExtResource("1_18nlu")
 
 [node name="Background" type="TileMapLayer" parent="."]

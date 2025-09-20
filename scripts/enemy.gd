@@ -14,7 +14,6 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 	
 	if $DeathDetector.is_colliding():
-		print("enemy ded, breh")
 		emit_signal("killed")
 		queue_free()
 	

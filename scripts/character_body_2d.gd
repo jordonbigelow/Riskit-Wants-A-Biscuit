@@ -46,7 +46,6 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_biscuit_tree_exiting() -> void:
-	#$Camera2D/HUD/BackButton.visible = true
 	$Camera2D/HUD/YouWinLabel.visible = true
 	$GameWonTimer.start()
 
