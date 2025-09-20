@@ -3,7 +3,7 @@ extends CharacterBody2D
 signal player_hit
 signal killed
 
-const SPEED = 70.0
+const SPEED = 45.0
 const JUMP_VELOCITY = -250.0
 
 var direction := -1

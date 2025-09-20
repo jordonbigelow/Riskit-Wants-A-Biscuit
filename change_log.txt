@@ -3,3 +3,5 @@
 - added jumping sound effects
 - added enemy death sound
 - added biscuit collect sound
+- added button clicking sound
+- lowered enemy movement speed
