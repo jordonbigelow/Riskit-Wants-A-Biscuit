@@ -17,7 +17,7 @@ var heart_count: int = 3
 @onready var kill_count_component := $Camera2D/HUD/KillCountComponent
 @onready var heart_count_label := $Camera2D/HUD/HealthComponent/HeartCount
 @onready var death_message: Label = $Camera2D/HUD/DeadLabel
-@onready var game_restart_timer: Timer = $GameWonTimer
+
 @onready var player_won_message: Label = $Camera2D/HUD/YouWinLabel
 
 func _physics_process(delta: float) -> void:
@@ -60,11 +60,6 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
-func _on_biscuit_tree_exiting() -> void:
-	player_won_message.visible = true
-	game_restart_timer.start()
-
-
 func _on_kill_zone_body_entered(body: Node2D) -> void:
 	if body.name == "Player":
 		death_message.visible = true
@@ -95,3 +90,7 @@ func _on_enemy_player_hit() -> void:
 func _on_enemy_killed() -> void:
 	kill_count += 1
 	kill_count_component.get_child(1).text = " x " + str(kill_count)
+
+
+func _on_biscuit_player_collected(_body: Node2D) -> void:
+	player_won_message.visible = true
