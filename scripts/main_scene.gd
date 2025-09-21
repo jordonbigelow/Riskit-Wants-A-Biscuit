@@ -6,14 +6,15 @@ extends Node2D
 @onready var enemy_killed_sound = load("res://assets/sound/enemy_squished.wav")
 @onready var player_jump_sound = load("res://assets/sound/jump.wav")
 @onready var button_clicked_sound = load("res://assets/sound/button_click.wav")
+@onready var back_button: Button = $Player/Camera2D/HUD/BackButton
 
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("esc_menu"):
-		if $Player/Camera2D/HUD/BackButton.visible == false:
-			$Player/Camera2D/HUD/BackButton.visible = true
+		if back_button.visible == false:
+			back_button.visible = true
 		else:
-			$Player/Camera2D/HUD/BackButton.visible = false
+			back_button.visible = false
 
 
 func _on_back_button_pressed() -> void:
