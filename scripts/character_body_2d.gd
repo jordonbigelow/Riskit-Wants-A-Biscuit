@@ -7,6 +7,7 @@ const DOUBLE_JUMP_AMOUNT = 1
 var player_jump_amount = 0
 var can_player_double_jump: bool = true
 var kill_count: int = 0
+var heart_count: int = 3
 
 @onready var starting_scene: PackedScene = load("res://scenes/starting_screen.tscn")
 
@@ -71,10 +72,15 @@ func _on_respawn_timer_timeout() -> void:
 
 func _on_enemy_player_hit() -> void:
 	$Camera2D/HUD/DeadLabel.visible = true
+	if heart_count > 0:
+		heart_count -= 1
+		$Camera2D/HUD/HealthComponent/HeartIcon.hide()
+		$Camera2D/HUD/HealthComponent/HeartCount.text = " x " + str(heart_count)
 	
-	if $RespawnTimer.time_left <= 0:
-		Engine.time_scale = 0.25
-		$RespawnTimer.start()
+	if heart_count <= 0:
+		if $RespawnTimer.time_left <= 0:
+			Engine.time_scale = 0.25
+			$RespawnTimer.start()
 
 
 func _on_enemy_killed() -> void:
