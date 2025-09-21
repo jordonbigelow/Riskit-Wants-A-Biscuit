@@ -5,3 +5,4 @@
 - added biscuit collect sound
 - added button clicking sound
 - lowered enemy movement speed
+- added lava killzone
