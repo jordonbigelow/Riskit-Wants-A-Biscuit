@@ -10,37 +10,45 @@ var kill_count: int = 0
 var heart_count: int = 3
 
 @onready var starting_scene: PackedScene = load("res://scenes/starting_screen.tscn")
-
+@onready var audio_player: AudioStreamPlayer2D = $AudioStreamPlayer2D
+@onready var player_sprite: Sprite2D = $Sprite2D
+@onready var health_hud_component := $Camera2D/HUD/HealthComponent
+@onready var respawn_timer: Timer = $RespawnTimer
+@onready var kill_count_component := $Camera2D/HUD/KillCountComponent
+@onready var heart_count_label := $Camera2D/HUD/HealthComponent/HeartCount
+@onready var death_message: Label = $Camera2D/HUD/DeadLabel
+@onready var game_restart_timer: Timer = $GameWonTimer
+@onready var player_won_message: Label = $Camera2D/HUD/YouWinLabel
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("move_left"):
-		$Sprite2D.flip_h = true
+		player_sprite.flip_h = true
 	if Input.is_action_just_pressed("move_right"):
-		$Sprite2D.flip_h = false
+		player_sprite.flip_h = false
 		
 	if is_on_wall() and Input.is_action_just_pressed("jump"):
-		$AudioStreamPlayer2D.pitch_scale += 0.1
-		$AudioStreamPlayer2D.play()
+		audio_player.pitch_scale += 0.1
+		audio_player.play()
 		velocity.y = JUMP_VELOCITY
 	
 	if not is_on_floor() and Input.is_action_just_pressed("jump"):
 		if player_jump_amount < DOUBLE_JUMP_AMOUNT:
-			$AudioStreamPlayer2D.pitch_scale = 1.5
-			$AudioStreamPlayer2D.play()
+			audio_player.pitch_scale = 1.5
+			audio_player.play()
 			player_jump_amount += 1
 			
 			if can_player_double_jump:
 				velocity.y = JUMP_VELOCITY  
 	
 	if is_on_floor():
-		$AudioStreamPlayer2D.pitch_scale = 1.0
+		audio_player.pitch_scale = 1.0
 		player_jump_amount = 0    
 		
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
 	if Input.is_action_just_pressed("jump") and is_on_floor():
-		$AudioStreamPlayer2D.play()
+		audio_player.play()
 		velocity.y = JUMP_VELOCITY
 	
 	var direction := Input.get_axis("move_left", "move_right")
@@ -53,15 +61,15 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_biscuit_tree_exiting() -> void:
-	$Camera2D/HUD/YouWinLabel.visible = true
-	$GameWonTimer.start()
+	player_won_message.visible = true
+	game_restart_timer.start()
 
 
 func _on_kill_zone_body_entered(body: Node2D) -> void:
 	if body.name == "Player":
-		$Camera2D/HUD/DeadLabel.visible = true
+		death_message.visible = true
 		Engine.time_scale = 0.5
-		$RespawnTimer.start()
+		respawn_timer.start()
 
 
 func _on_respawn_timer_timeout() -> void:
@@ -71,18 +79,19 @@ func _on_respawn_timer_timeout() -> void:
 
 
 func _on_enemy_player_hit() -> void:
-	$Camera2D/HUD/DeadLabel.visible = true
+	death_message.visible = true
+	
 	if heart_count > 0:
 		heart_count -= 1
-		$Camera2D/HUD/HealthComponent/HeartIcon.hide()
-		$Camera2D/HUD/HealthComponent/HeartCount.text = " x " + str(heart_count)
+		health_hud_component.get_child(heart_count).hide()
+		heart_count_label.text = " x " + str(heart_count)
 	
 	if heart_count <= 0:
-		if $RespawnTimer.time_left <= 0:
+		if respawn_timer.time_left <= 0:
 			Engine.time_scale = 0.25
-			$RespawnTimer.start()
+			respawn_timer.start()
 
 
 func _on_enemy_killed() -> void:
 	kill_count += 1
-	$Camera2D/HUD/KillCountComponent/KillCount.text = " x " + str(kill_count)
+	kill_count_component.get_child(1).text = " x " + str(kill_count)
