@@ -12,6 +12,14 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_wqtuv")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -3459.0
+offset_top = -1827.0
+offset_right = 3651.0
+offset_bottom = 2545.0
+color = Color(0.356863, 0.105882, 0.360784, 1)
+
 [node name="Instructions" type="Label" parent="."]
 layout_mode = 0
 offset_left = 15.0

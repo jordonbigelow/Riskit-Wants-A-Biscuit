@@ -42,7 +42,7 @@ offset_right = 2350.0
 offset_bottom = 1796.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.191389, 2.76631e-05, 0.194165, 1)
+color = Color(0.35574, 0.1044, 0.36, 1)
 
 [node name="MainUI" type="BoxContainer" parent="."]
 layout_mode = 1
