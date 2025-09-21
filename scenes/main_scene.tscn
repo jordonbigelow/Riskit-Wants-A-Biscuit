@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://cfr7v288b4fg3"]
+[gd_scene load_steps=20 format=4 uid="uid://cfr7v288b4fg3"]
 
 [ext_resource type="Script" uid="uid://gl61tfrcih2e" path="res://scripts/main_scene.gd" id="1_18nlu"]
 [ext_resource type="Texture2D" uid="uid://cj8sfbb87fepi" path="res://assets/Tileset_Templates/Tileset_2D Platformer.png" id="1_c16ls"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c1g0gtsufltck" path="res://assets/placeholder-char.png" id="3_c1pb6"]
 [ext_resource type="Script" uid="uid://bn74q8prfbn6r" path="res://scripts/biscuit.gd" id="4_6wevv"]
 [ext_resource type="Texture2D" uid="uid://diglkiq77n655" path="res://assets/hud_icons/Kill icon 2.png" id="4_c1pb6"]
+[ext_resource type="Texture2D" uid="uid://rukfcynbkdtw" path="res://assets/Heart.png" id="5_e1cbu"]
 [ext_resource type="AudioStream" uid="uid://bvnaq0xhridw4" path="res://assets/sound/jump.wav" id="6_6wevv"]
 [ext_resource type="Texture2D" uid="uid://dukr6idl6qxkm" path="res://assets/biscuit.png" id="6_18nlu"]
 [ext_resource type="Script" uid="uid://b5m2flqs2ju6b" path="res://scripts/enemy.gd" id="6_mngbo"]
@@ -73,6 +74,11 @@ font_size = 11
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_mngbo"]
+font_size = 11
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nfk4m"]
 size = Vector2(10, 14)
 
@@ -131,6 +137,34 @@ texture = ExtResource("4_c1pb6")
 layout_mode = 2
 text = " x 0"
 label_settings = SubResource("LabelSettings_c1pb6")
+
+[node name="HealthComponent" type="HBoxContainer" parent="Player/Camera2D/HUD"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -45.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = 21.0
+grow_horizontal = 0
+
+[node name="HeartIcon" type="TextureRect" parent="Player/Camera2D/HUD/HealthComponent"]
+layout_mode = 2
+texture = ExtResource("5_e1cbu")
+
+[node name="HeartIcon2" type="TextureRect" parent="Player/Camera2D/HUD/HealthComponent"]
+layout_mode = 2
+texture = ExtResource("5_e1cbu")
+
+[node name="HeartIcon3" type="TextureRect" parent="Player/Camera2D/HUD/HealthComponent"]
+layout_mode = 2
+texture = ExtResource("5_e1cbu")
+
+[node name="HeartCount" type="Label" parent="Player/Camera2D/HUD/HealthComponent"]
+layout_mode = 2
+text = " x 3"
+label_settings = SubResource("LabelSettings_mngbo")
 
 [node name="BackButton" type="Button" parent="Player/Camera2D/HUD"]
 visible = false
