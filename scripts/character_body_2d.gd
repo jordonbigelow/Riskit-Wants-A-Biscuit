@@ -9,12 +9,12 @@ var can_player_double_jump: bool = true
 var kill_count: int = 0
 
 @onready var starting_scene: PackedScene = load("res://scenes/starting_screen.tscn")
-@onready var audio_player: AudioStreamPlayer2D = $AudioStreamPlayer2D
-@onready var player_sprite: Sprite2D = $Sprite2D
+@onready var audio_player := $AudioStreamPlayer2D
+@onready var player_sprite := $Sprite2D
 @onready var health_hud_component := $Camera2D/HUD/HealthComponent
 @onready var kill_count_component := $Camera2D/HUD/KillCountComponent
-@onready var death_message: Label = $Camera2D/HUD/DeadLabel
-@onready var player_won_message: Label = $Camera2D/HUD/YouWinLabel
+@onready var death_message := $Camera2D/HUD/DeadLabel
+@onready var player_won_message := $Camera2D/HUD/YouWinLabel
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("move_left"):
