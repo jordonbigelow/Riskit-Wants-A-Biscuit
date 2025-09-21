@@ -7,6 +7,7 @@ extends Node2D
 @onready var player_jump_sound = load("res://assets/sound/jump.wav")
 @onready var button_clicked_sound = load("res://assets/sound/button_click.wav")
 @onready var back_button: Button = $Player/Camera2D/HUD/BackButton
+@onready var game_restart_timer: Timer = $GameWonTimer
 
 
 func _process(_delta: float) -> void:
@@ -40,3 +41,4 @@ func _on_audio_stream_player_2d_finished() -> void:
 func _on_biscuit_player_collected(_body: Node2D) -> void:
 	audio_player.set_stream(biscuit_collect_sound)
 	audio_player.play()
+	game_restart_timer.start()
