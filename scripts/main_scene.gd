@@ -9,7 +9,7 @@ extends Node2D
 @onready var back_button: Button = $Player/Camera2D/HUD/BackButton
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("esc_menu"):
 		if back_button.visible == false:
 			back_button.visible = true
@@ -37,6 +37,6 @@ func _on_audio_stream_player_2d_finished() -> void:
 	audio_player.set_stream(player_jump_sound)
 
 
-func _on_biscuit_player_collected(body: Node2D) -> void:
+func _on_biscuit_player_collected(_body: Node2D) -> void:
 	audio_player.set_stream(biscuit_collect_sound)
 	audio_player.play()
